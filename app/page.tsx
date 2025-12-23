@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 
 // 페이지 전환 시 Link가 기본임
 // useRouter를 사용하여 프로그래밍 방식으로 페이지 전환하는 건 코드 로직 타고 조건/처리 후 이동할 때 유용
-// 예시 : 로그인 성공하여 보내기,  제출 후 이동 등
+// 예시 : 로그인 성공하여 보내기,  제출 후 이동 등 //
 export default function Home() {
   return (
     <section className="min-h-dvh font-coraboard text-white bg-[#8C84F8] flex flex-col gap-24 p-8 justify-center items-center">
