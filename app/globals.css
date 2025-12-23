@@ -1,8 +1,19 @@
 @import "tailwindcss";
 
 :root {
+  --font-base: var(--font-geist-sans);
+
+  --font-momentix: var(--font-domine);
+  --font-camkeep: var(--font-luckiest);
+  --font-dogo: var(--font-domine);
+  --font-coraboard: var(--font-dynapuff);
+
   --background: #ffffff;
   --foreground: #171717;
+  --fs-title: 22px;
+  --fs-body: 16px;
+  --lh-tight: 1.2;
+  --lh-normal: 1.6;
 }
 
 @theme inline {
@@ -22,5 +33,44 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans);
+}
+
+.font-momentix {
+  font-family: var(--font-momentix);
+}
+.font-camkeep {
+  font-family: var(--font-camkeep);
+}
+.font-dogo {
+  font-family: var(--font-dogo);
+}
+.font-coraboard {
+  font-family: var(--font-coraboard);
+}
+
+/* 타이포 스케일 - 선언해 놓고 쓰는 방식*/
+.typo-title {
+  font-size: var(--fs-title);
+  line-height: var(--lh-tight);
+}
+.typo-body {
+  font-size: var(--fs-body);
+  line-height: var(--lh-normal);
+}
+html,
+body {
+  height: 100%;
+}
+
+.app-shell {
+  min-height: 100dvh; /* 모바일까지 고려한 “스크린 풀” */
+  display: flex;
+  flex-direction: column;
+}
+
+.app-main {
+  flex: 1; /* 남은 높이 전부 차지 */
+  display: flex; /* 페이지 내용 가운데정렬 하고 싶으면 쓰기 좋음 */
+  flex-direction: column;
 }
