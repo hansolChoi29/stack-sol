@@ -1,8 +1,9 @@
+"use client";
 import { ProjectGroup } from "./ProjectGroup";
 
 export function HomeContent() {
   return (
-    <section className="home-shell font-coraboard">
+    <section className="home-shell font-coraboard ">
       <ProjectGroup
         title="backend"
         projects={[

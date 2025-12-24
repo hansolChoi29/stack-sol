@@ -1,6 +1,8 @@
 @import "tailwindcss";
 
 :root {
+  --brand: #8c84f8;
+  --bg: #0b0b12;
   --font-base: var(--font-geist-sans);
 
   --font-momentix: var(--font-domine);
@@ -10,7 +12,7 @@
 
   --background: #ffffff;
   --foreground: #171717;
-  --fs-title: 22px;
+  --fs-title: 2px;
   --fs-body: 16px;
   --lh-tight: 1.2;
   --lh-normal: 1.6;
@@ -29,11 +31,46 @@
     --foreground: #ededed;
   }
 }
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+.introLine {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: fadeUp 420ms ease forwards;
+}
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.92);
   font-family: var(--font-geist-sans);
+}
+.bg-layer {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  background: radial-gradient(
+      900px 600px at 30% 20%,
+      rgba(140, 132, 248, 0.35),
+      transparent 60%
+    ),
+    radial-gradient(
+      800px 500px at 70% 65%,
+      rgba(140, 132, 248, 0.18),
+      transparent 60%
+    ),
+    linear-gradient(180deg, var(--bg), #111126);
+
+  background-attachment: fixed;
 }
 
 .font-momentix {
@@ -63,12 +100,217 @@ body {
   height: 100%;
 }
 
+/* SideNav + main 가로 배치 */
+.app-row {
+  display: flex;
+  flex: 1;
+  min-height: 100dvh;
+}
+/* 사이드바 (너가 지금 inline style로 주던 걸 CSS로 옮긴 버전) */
+.side-nav {
+  position: sticky;
+  top: 0;
+  height: 100dvh;
+  width: 110px;
+  background: rgba(255, 255, 255, 0.95);
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 18px 10px;
+  gap: 14px;
+  backdrop-filter: blur(10px);
+}
+.side-logo {
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #111;
+  text-decoration: none;
+  margin-bottom: 8px;
+}
+
+.side-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.side-link {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: 12px;
+  padding: 10px 7px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.55);
+}
+
+.side-link.active {
+  color: #111;
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.side-version {
+  margin-top: auto;
+  font-size: 11px;
+  color: rgba(0, 0, 0, 0.55);
+}
+
 .app-shell {
   min-height: 100dvh; /* 모바일까지 고려한 “스크린 풀” */
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: stretch;
+}
+.hero-shell {
+  position: relative;
+}
+.hero-glow {
+  position: absolute;
+  inset: -40px;
+  background: radial-gradient(
+      600px 220px at 50% 30%,
+      rgba(140, 132, 248, 0.22),
+      transparent 65%
+    ),
+    radial-gradient(
+      420px 220px at 20% 55%,
+      rgba(255, 255, 255, 0.06),
+      transparent 60%
+    );
+  filter: blur(10px);
+  opacity: 0.9;
 }
 
+.hero-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 999px;
+  backdrop-filter: blur(10px);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 12px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+
+  transform: translateY(6px);
+  opacity: 0;
+  animation: heroIn 700ms ease forwards;
+}
+
+.hero-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(140, 132, 248, 0.95);
+  box-shadow: 0 0 0 6px rgba(140, 132, 248, 0.15);
+}
+
+.hero-title {
+  font-size: clamp(28px, 4.4vw, 56px);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+.brand {
+  color: var(--brand);
+  text-shadow: 0 0 24px rgba(140, 132, 248, 0.35);
+}
+
+.hero-sub {
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 14px;
+}
+
+.hero-scroll {
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* "박혀있음" 없애는 핵심: 순차 등장 */
+.hero-line {
+  opacity: 0;
+  transform: translateY(10px);
+  filter: blur(2px);
+  animation: heroIn 750ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes heroIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* 딜레이 (Tailwind 없이 CSS로만) */
+.delay-1 {
+  animation-delay: 80ms;
+}
+.delay-2 {
+  animation-delay: 180ms;
+}
+.delay-3 {
+  animation-delay: 280ms;
+}
+.delay-4 {
+  animation-delay: 380ms;
+}
+.delay-5 {
+  animation-delay: 520ms;
+}
+.delay-6 {
+  animation-delay: 640ms;
+}
+.delay-7 {
+  animation-delay: 760ms;
+}
+
+/* 버튼들 */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 18px;
+  border-radius: 999px;
+  background: rgba(140, 132, 248, 0.95);
+  color: rgba(10, 10, 18, 0.96);
+  font-weight: 700;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 18px 40px rgba(140, 132, 248, 0.18);
+  transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+  box-shadow: 0 22px 55px rgba(140, 132, 248, 0.28);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(10px);
+  transition: transform 160ms ease, background 160ms ease,
+    border-color 160ms ease;
+}
+
+.btn-ghost:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.22);
+}
 .app-main {
   flex: 1; /* 남은 높이 전부 차지 */
   display: flex; /* 페이지 내용 가운데정렬 하고 싶으면 쓰기 좋음 */
@@ -78,11 +320,11 @@ body {
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
-  gap: 6rem;
-  padding: 2rem;
   justify-content: center;
   align-items: center;
-  background: #8c84f8;
+  background: transparent;
+  padding: 5rem 2rem;
+  gap: 4rem;
 }
 
 .project-group {
@@ -98,7 +340,28 @@ body {
 }
 
 .project-links {
-  display: flex;
-  gap: 3.5rem;
-  font-size: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  width: min(720px, 90vw);
+  font-size: 1.2rem;
+}
+.container {
+  width: min(1100px, 92vw);
+  margin: 0 auto;
+}
+.section {
+  padding: 90px 0;
+}
+
+/* 프로젝트 박스 통일 */
+.card {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 18px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.25);
+}
+.card-pad {
+  padding: 22px;
 }

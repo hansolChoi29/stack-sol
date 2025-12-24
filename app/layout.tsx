@@ -8,6 +8,7 @@ import {
   Domine,
   Luckiest_Guy,
 } from "next/font/google";
+import SideNav from "./_components/SideNav";
 
 const geistSans = Geist({ subsets: ["latin"], variable: "--font-geist-sans" });
 const geistMono = Geist_Mono({
@@ -53,6 +54,7 @@ export default function RootLayout({
       ].join(" ")}
     >
       <body className="app-shell">
+        <div className="bg-layer" aria-hidden="true" />
         <main className="app-main">{children}</main>
       </body>
     </html>
