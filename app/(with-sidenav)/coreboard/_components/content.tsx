@@ -113,7 +113,9 @@ export function CoreBoardContent() {
                       {/* optional: 미리보기 한 줄 */}
                       {r.content && (
                         <p className="mt-1 line-clamp-1 text-sm text-black/55">
-                          {String(r.content)}
+                          {String(r.content).length > 20
+                            ? String(r.content).slice(0, 20) + "…"
+                            : String(r.content)}
                         </p>
                       )}
                     </TableCell>
