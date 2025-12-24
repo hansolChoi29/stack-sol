@@ -92,11 +92,11 @@ const PROJECT_META: Record<
     name: "CoreBoard ",
     stack: ["Spring Boot", "JWT", "Test", "MySQL"],
     theme: {
-      bg: "#0A008F",
-      fg: "#8C84F8",
-      muted: "rgba(140,132,248,0.78)",
-      border: "rgba(140,132,248,0.20)",
-      chipBg: "rgba(140,132,248,0.14)",
+      bg: "#FFC767",
+      fg: "#000000",
+      muted: "#000000",
+      border: "#F9D9A1",
+      chipBg: "#F9D9A1",
     },
     features: {
       title: "CoreBoard (미니 게시판)",
@@ -143,11 +143,11 @@ const NAV_THEME: Record<
     border: "#241E7A",
   },
   coreboard: {
-    bg: "#0A008F",
-    fg: "#8C84F8",
-    muted: "rgba(123, 114, 250, 0.816)",
-    activeBg: "rgba(173, 167, 255, 0.14)",
-    border: "#0A008F",
+    bg: "#FFC767",
+    fg: "#000000",
+    muted: "#000000",
+    activeBg: "#F9D9A1",
+    border: "#FFC767",
   },
 };
 export { LINES, PROJECTS, PROJECT_META, NAV_THEME };
