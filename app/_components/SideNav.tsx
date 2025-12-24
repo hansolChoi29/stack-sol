@@ -2,72 +2,13 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
-const PROJECTS = [
-  { slug: "coreboard", label: "CoreBoard" },
-  { slug: "momentix", label: "Momentix" },
-  { slug: "camkeep", label: "Camkeep" },
-  { slug: "dogo", label: "DoGo" },
-] as const;
-
-// Recored<K,V> :키가 K인 객체이고, 값은 V다
-const NAV_THEME: Record<
-  (typeof PROJECTS)[number]["slug"], // PROJECTS 배열에서 slug만 뽑아오겠다, number는 배열의 원소 하나 타입
-  {
-    bg: string;
-    fg: string;
-    muted: string;
-    activeBg: string;
-    border: string;
-  }
-> = {
-  camkeep: {
-    bg: "#578E7E",
-    fg: "#FFFAEC",
-    muted: "rgba(255,250,236,0.70)",
-    activeBg: "rgba(236, 255, 243, 0.14)",
-    border: "#578E7E",
-  },
-  dogo: {
-    bg: "#221A1A",
-    fg: "#EEC18D",
-    muted: "rgba(238,193,141,0.70)",
-    activeBg: "rgba(238,193,141,0.14)",
-    border: "#221A1A",
-  },
-  momentix: {
-    bg: "#241E7A",
-    fg: "#FFFFFF",
-    muted: "rgba(255,255,255,0.70)",
-    activeBg: "rgba(255,255,255,0.14)",
-    border: "#241E7A",
-  },
-  coreboard: {
-    bg: "#0A008F",
-    fg: "#8C84F8",
-    muted: "rgba(123, 114, 250, 0.816)",
-    activeBg: "rgba(173, 167, 255, 0.14)",
-    border: "#0A008F",
-  },
-};
-
-function getSlugFromPath(pathname: string) {
-  // pathname: "/momentix", "/momentix/abc" etc
-  const seg = pathname.split("/")[1] ?? "";
-  if (
-    seg === "coreboard" ||
-    seg === "momentix" ||
-    seg === "camkeep" ||
-    seg === "dogo"
-  )
-    return seg;
-  return null;
-}
+import { NAV_THEME, PROJECTS } from "../data/Intro";
+import { getSlugSideFromPath } from "../lib/utils";
 
 export default function SideNav() {
   const pathname = usePathname();
 
-  const slug = getSlugFromPath(pathname);
+  const slug = getSlugSideFromPath(pathname);
   // slug가 null이면(이상한 경로) 그냥 기본값
   const theme = slug ? NAV_THEME[slug] : NAV_THEME.coreboard;
 

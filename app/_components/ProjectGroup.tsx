@@ -1,10 +1,5 @@
 import Link from "next/link";
 
-interface Project {
-  label: string;
-  href: string;
-}
-
 export function ProjectGroup({
   title,
   projects,

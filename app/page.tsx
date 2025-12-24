@@ -1,9 +1,6 @@
 import { HomeContent } from "./_components/HomeContent";
-const LINES = [
-  "수많은 트러블슈팅을 마주했습니다.",
-  "하지만 문제를 해결하는 것보다",
-  "기록하고 구조화하는 일이 더 어려웠습니다.",
-];
+import { LINES } from "./data/Intro";
+
 export default function Home() {
   return (
     <main>
@@ -20,7 +17,10 @@ export default function Home() {
 
             <h1 className="mt-6 font-coraboard hero-title">
               {LINES.map((t, i) => (
-                <span key={t} className={`block hero-line delay-${i + 1}`}>
+                <span
+                  key={`${t}-${i}`}
+                  className={`block hero-line delay-${i + 1}`}
+                >
                   {t}
                 </span>
               ))}
