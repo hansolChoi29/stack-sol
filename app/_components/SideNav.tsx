@@ -73,7 +73,7 @@ export default function SideNav() {
 
   return (
     <aside
-      className="sticky top-0 h-[100dvh] w-[110px] flex flex-col items-center gap-3.5 px-[10px] py-[18px] backdrop-blur"
+      className="fixed left-0 top-0 z-50 h-screen w-[110px] flex flex-col items-center gap-3.5 px-[10px] py-[18px] backdrop-blur"
       style={{
         backgroundColor: theme.bg,
         color: theme.fg,
