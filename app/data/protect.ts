@@ -39,3 +39,20 @@ export const COREBOARDPOSTS: Post[] = [
     content: `상세 내상세 내상세 내상세 내상세 내상세 내상세 내상세 내상세 내상세 내상세 내상세 내상세 내.`,
   },
 ];
+
+export const MOMENTIXPOSTS: Post[] = [
+  {
+    id: 1,
+    title: "CICD",
+    author: "한솔",
+    status: "성능 개선",
+    content: `상세 내상세 내상세 내상세 내상세 내상세 내용...`,
+  },
+  {
+    id: 2,
+    title: "이메일 인증",
+    author: "한솔",
+    status: "트러블슈팅",
+    content: `상세 내상세 내상세 내상세 내상세 내상세 내상세 내상세 내상세 내상세 내상세 내상세 내상세 내.`,
+  },
+];
