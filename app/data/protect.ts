@@ -26,7 +26,7 @@ export const CAMKEEPPOSTS: Post[] = [
     title: "JWT 인터셉터 예외 처리",
     author: "한솔",
     status: "트러블슈팅",
-    content: `상세 내상세 내상세 내상세 내상세 내상세 내용...`,
+    content: `JWT 인터셉터 예외 처리JWT 인터셉터 예외 처리JWT 인터셉터 예외 처리JWT 인터셉터 예외 처리JWT 인터셉터 예외 처리JWT 인터셉터 예외 처리JWT 인터셉터 예외 처리JWT 인터셉터 예외 처리JWT 인터셉터 예외 처리JWT 인터셉터 예외 처리JWT 인터셉터 예외 처리`,
   },
   {
     id: 4,
