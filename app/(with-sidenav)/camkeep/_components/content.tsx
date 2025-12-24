@@ -105,9 +105,9 @@ export function CamkeepContent() {
                             트러블슈팅
                           </Badge>
                         )}
-                        {r.status === "일반" && (
+                        {r.status === "성능 개선" && (
                           <Badge variant="secondary" className="text-black/80">
-                            일반
+                            성능개선
                           </Badge>
                         )}
                       </div>
