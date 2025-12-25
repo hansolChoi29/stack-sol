@@ -10,7 +10,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { CAMKEEPPOSTS } from "@/app/data/protect";
+import { CAMKEEPPOSTS, getPostTypeLabel } from "@/app/data/protect";
 import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -24,16 +24,11 @@ export function CamkeepContent() {
     if (!query) return CAMKEEPPOSTS;
 
     return CAMKEEPPOSTS.filter((p) => {
+      const label = getPostTypeLabel(p.type); // "트러블슈팅" | "성능 개선"
       return (
-        String(p.title ?? "")
-          .toLowerCase()
-          .includes(query) ||
-        String(p.author ?? "")
-          .toLowerCase()
-          .includes(query) ||
-        String(p.status ?? "")
-          .toLowerCase()
-          .includes(query)
+        (p.title ?? "").toLowerCase().includes(query) ||
+        (p.author ?? "").toLowerCase().includes(query) ||
+        label.toLowerCase().includes(query)
       );
     });
   }, [q]);
@@ -89,42 +84,48 @@ export function CamkeepContent() {
                   </TableCell>
                 </TableRow>
               ) : (
-                rows.map((r) => (
-                  <TableRow
-                    key={r.id}
-                    onClick={() => router.push(`/camkeep/${r.id}`)}
-                    className="cursor-pointer hover:bg-black/[0.03] transition-colors"
-                  >
-                    <TableCell className="text-black/70">{r.id}</TableCell>
+                rows.map((r, idx) => {
+                  const label = getPostTypeLabel(r.type);
 
-                    <TableCell className="text-black">
-                      <div className="flex items-center gap-2">
-                        <span className="font-medium">{r.title}</span>
-                        {r.status === "트러블슈팅" && (
-                          <Badge className="bg-[#578E7E] text-white hover:opacity-90">
-                            트러블슈팅
-                          </Badge>
-                        )}
-                        {r.status === "성능 개선" && (
-                          <Badge variant="secondary" className="text-black/80">
-                            성능개선
-                          </Badge>
-                        )}
-                      </div>
+                  return (
+                    <TableRow
+                      key={r.id}
+                      onClick={() => router.push(`/camkeep/${r.slug}`)}
+                      className="cursor-pointer hover:bg-black/[0.03] transition-colors"
+                    >
+                      <TableCell className="text-black/70">{idx + 1}</TableCell>
 
-                      {/* optional: 미리보기 한 줄 */}
-                      {r.content && (
+                      <TableCell className="text-black">
+                        <div className="flex items-center gap-2">
+                          <span className="font-medium">{r.title}</span>
+
+                          {label === "트러블슈팅" && (
+                            <Badge className="bg-[#578E7E] text-white hover:opacity-90">
+                              트러블슈팅
+                            </Badge>
+                          )}
+                          {label === "성능 개선" && (
+                            <Badge
+                              variant="secondary"
+                              className="text-black/80"
+                            >
+                              성능개선
+                            </Badge>
+                          )}
+                        </div>
+
+                        {/* 미리보기: summary 우선 */}
                         <p className="mt-1 line-clamp-1 text-sm text-black/55">
-                          {String(r.content).length > 20
-                            ? String(r.content).slice(0, 20) + "…"
-                            : String(r.content)}
+                          {r.summary ?? r.content}
                         </p>
-                      )}
-                    </TableCell>
+                      </TableCell>
 
-                    <TableCell className="text-black/70">{r.author}</TableCell>
-                  </TableRow>
-                ))
+                      <TableCell className="text-black/70">
+                        {r.author}
+                      </TableCell>
+                    </TableRow>
+                  );
+                })
               )}
             </TableBody>
           </Table>
